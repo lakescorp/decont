@@ -6,3 +6,18 @@
 
 # STAR --runThreadN 4 --runMode genomeGenerate --genomeDir <outdir> \
 # --genomeFastaFiles <genomefile> --genomeSAindexNbases 9
+
+numberThreads=10
+
+if [[ -d $2 ]]; then
+  echo "Index directory $2 already exists. Skipping indexing."
+  exit 0
+fi
+
+mkdir -p $2
+STAR \
+    --runThreadN $numberThreads \
+    --runMode genomeGenerate \
+    --genomeDir $2 \
+    --genomeFastaFiles $1 \
+    --genomeSAindexNbases 9
